@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<span>put JS clock here with countdown time to EOD
+</span>
+<h1>To Do List
+</h1>
+<input id="newItemInput" type="text" placeholder="new item here">
+<button id="newItemBtn">Add Item
+</button>
+
+<ul id="list">
+
+	<li>go to store
+	</li>
+	<li> quit job
+	</li>
+	<li>play with kids
+	</li>
+
+</ul>
+
+
+
+
+
+
+</body>
+
+
+<script>
+
+function addListItem(){
+	let el = document.createElement("LI");
+	let item = document.getElementById("newItemInput").value;
+	let junk = document.createTextNode(item);
+	
+	el.appendChild(junk);
+	let list = document.querySelector("#list");
+	
+	if(item!=""){
+		list.appendChild(el);
+		
+		document.getElementById("newItemInput").value ="";
+	}
+	
+	
+
+};
+
+let submitBtn = document.querySelector("#newItemBtn");
+submitBtn.addEventListener("click", addListItem)
+
+
+</script>
+
+</body>
+</html>
