@@ -13,27 +13,49 @@
 }
 html{
 	background: #FFF8DC;
+	font-size: large;
+	font-family: Impact, Charcoal, sans-serif;
+	font-weight: normal;
 }
-
 span{
 	margin: 1vh;
 	display: block;
 }
+h1{
+	font-weight: normal;
+}
+input{
+	padding: 2vh;
+	font-size: large;
+	margin-right: 0;
+}
+#newItemBtn{
+	padding: 2vh;
+	font-size: large;
+	margin-left:0;
+}
 
+/********* LIST STYLING*********/
 ul{
 	padding:0;
 }
 
 li{
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
-}
+	display: flex;
+	justify-content: space-between;
 
+	margin: 0.5vh;
+	padding: 1vh;
+	list-style-type: none;
+	font-size: large;
+}
 ul li:nth-child(odd){
 	background: gray;
 	color: white;
-
+}
+ul li:hover{
+	background: black;
+	color: white;
 }
 
 
@@ -58,17 +80,19 @@ ul li:nth-child(odd){
 <ul id="list">
 
 	<li>go to store
+		<button class="completeBtn">Complete
+		</button>
 	</li>
 	<li> quit job
+		<button class="completeBtn">Complete
+		</button>
 	</li>
 	<li>play with kids
+		<button class="completeBtn">Complete
+		</button>
 	</li>
 
 </ul>
-
-
-
-
 
 
 </body>
@@ -133,11 +157,22 @@ function main(){
 setInterval(main, 1000);
 
 function addListItem(){
+	
 	let el = document.createElement("LI");//make new LI 
+	//add text value to LI 
 	let item = document.getElementById("newItemInput").value; //grab value from input for new item 
 	let junk = document.createTextNode(item); //create new text node for 
 	
+	//add complete button use .completBtn as class
+	let completeBtn = document.createElement("BUTTON");
+	completeBtn.innerHTML = "Complete";
+	completeBtn.class = "completeBtn";
+
+
+
 	el.appendChild(junk);
+	el.appendChild(completeBtn);
+
 	let list = document.querySelector("#list");
 	
 	if(item!=""){
