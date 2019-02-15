@@ -1,14 +1,59 @@
 <!DOCTYPE html>
 <html>
+<head>
+
+
+
+
+
+</head>
+<style>
+*{
+	box-sizing: border-box;
+}
+html{
+	background: #FFF8DC;
+}
+
+span{
+	margin: 1vh;
+	display: block;
+}
+
+ul{
+	padding:0;
+}
+
+li{
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+ul li:nth-child(odd){
+	background: gray;
+	color: white;
+
+}
+
+
+
+</style>
 <body>
 
-<span>put JS clock here with countdown time to EOD
+<span id="clock"> CLock
 </span>
+
 <h1>To Do List
 </h1>
+
 <input id="newItemInput" type="text" placeholder="new item here">
+
 <button id="newItemBtn">Add Item
 </button>
+
+<span id = "countdown">Time Left
+</span>
 
 <ul id="list">
 
@@ -31,10 +76,66 @@
 
 <script>
 
+function updateClock(){
+	let date = new Date();
+	let hour = date.getHours();
+	let minute = date.getMinutes();
+	let second = date.getSeconds();
+	if(hour>12){
+		hour -=12;
+	}
+	if(minute<10){
+		minute = `0${minute}`;
+	}
+	if(second<10){
+		second = `0${second}`;
+	}
+
+
+return (`Current Time is: ${hour}:${minute}:${second}`);
+
+};
+
+function nextDayTimer(){
+	let date = new Date();
+	let hour = date.getHours();
+	let minute = date.getMinutes();
+	let second = date.getSeconds();
+	
+	let targetHour = 23;
+	let targetMinute = 59;
+	let targetSecond = 60;
+
+return (`You have ${targetHour-hour} hours, ${targetMinute-minute} minutes and ${targetSecond - second} seconds left to get shit done!`);
+	
+
+};
+
+
+
+
+
+function main(){
+
+	let time = updateClock();
+	let clock = document.getElementById("clock");
+
+	clock.innerHTML = time;
+
+	let timeLeft = nextDayTimer();
+	let timer = document.getElementById("countdown");
+
+	timer.innerHTML = timeLeft;
+
+}
+
+
+setInterval(main, 1000);
+
 function addListItem(){
-	let el = document.createElement("LI");
-	let item = document.getElementById("newItemInput").value;
-	let junk = document.createTextNode(item);
+	let el = document.createElement("LI");//make new LI 
+	let item = document.getElementById("newItemInput").value; //grab value from input for new item 
+	let junk = document.createTextNode(item); //create new text node for 
 	
 	el.appendChild(junk);
 	let list = document.querySelector("#list");
@@ -44,10 +145,10 @@ function addListItem(){
 		
 		document.getElementById("newItemInput").value ="";
 	}
-	
-	
 
 };
+
+
 
 let submitBtn = document.querySelector("#newItemBtn");
 submitBtn.addEventListener("click", addListItem)
