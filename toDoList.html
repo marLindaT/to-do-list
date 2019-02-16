@@ -2,10 +2,6 @@
 <html>
 <head>
 
-
-
-
-
 </head>
 <style>
 *{
@@ -58,6 +54,25 @@ ul li:hover{
 	color: white;
 }
 
+/***********BUTTONS ********/
+
+.completeBtn{
+
+	border-radius: 5px;
+	box-shadow: 2px 2px black;
+	color:white;
+	background:green;
+	border:none;
+}
+
+#newItemBtn{
+	
+	box-shadow: 2px 2px black;
+	color:white;
+	background:green;
+	border:none;
+
+}
 
 
 </style>
@@ -80,16 +95,10 @@ ul li:hover{
 <ul id="list">
 
 	<li>go to store
-		<button class="completeBtn">Complete
-		</button>
 	</li>
-	<li> quit job
-		<button class="completeBtn">Complete
-		</button>
+	<li> quit job	
 	</li>
-	<li>play with kids
-		<button class="completeBtn">Complete
-		</button>
+	<li>play with kids	
 	</li>
 
 </ul>
@@ -100,6 +109,22 @@ ul li:hover{
 
 <script>
 
+(function(){
+let myNodelist = document.getElementsByTagName("LI");
+
+for (let i = 0; i < myNodelist.length; i++) {
+  let btn = document.createElement("Button");
+  
+  btn.className = "completeBtn";
+  let text = document.createTextNode("Complete");
+  btn.appendChild(text);
+  myNodelist[i].appendChild(btn);
+}
+
+
+})();
+
+//return current time
 function updateClock(){
 	let date = new Date();
 	let hour = date.getHours();
@@ -119,7 +144,7 @@ function updateClock(){
 return (`Current Time is: ${hour}:${minute}:${second}`);
 
 };
-
+//return time till EOD 
 function nextDayTimer(){
 	let date = new Date();
 	let hour = date.getHours();
@@ -136,9 +161,7 @@ return (`You have ${targetHour-hour} hours, ${targetMinute-minute} minutes and $
 };
 
 
-
-
-
+//repeat main to update clock and countdown timer 
 function main(){
 
 	let time = updateClock();
@@ -153,7 +176,7 @@ function main(){
 
 }
 
-
+//interval OK to use for slow refresh
 setInterval(main, 1000);
 
 function addListItem(){
@@ -162,13 +185,12 @@ function addListItem(){
 	//add text value to LI 
 	let item = document.getElementById("newItemInput").value; //grab value from input for new item 
 	let junk = document.createTextNode(item); //create new text node for 
-	
-	//add complete button use .completBtn as class
-	let completeBtn = document.createElement("BUTTON");
-	completeBtn.innerHTML = "Complete";
-	completeBtn.class = "completeBtn";
 
 
+//add complete button use .completBtn as class
+let completeBtn = document.createElement("BUTTON");
+completeBtn.innerHTML = "Complete";
+completeBtn.class = "completeBtn";
 
 	el.appendChild(junk);
 	el.appendChild(completeBtn);
@@ -180,10 +202,19 @@ function addListItem(){
 		
 		document.getElementById("newItemInput").value ="";
 	}
-
 };
 
+//IIFE for hiding completed items
+(function(){
 
+let done = document.getElementsByClassName("completeBtn");
+
+for(let i= 0; i< done.length;i++){
+	done[i].onclick =function(){
+		this.parentElement.style.display = "none";
+	}
+}
+})();
 
 let submitBtn = document.querySelector("#newItemBtn");
 submitBtn.addEventListener("click", addListItem)
