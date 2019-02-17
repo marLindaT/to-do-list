@@ -6,57 +6,96 @@
 </style>
 </head>
 <style>
+html{
+	background: #FAFAD2;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
 
+
+ul{
+	margin:0;
+	padding:0;
+}
+li:hover{
+	background:green;
+}
+ul li:nth-child(odd){
+	background: gray;
+}
  .listItem {
+ 	margin: 1px;
+ 	padding:3px;
+ 	list-style-type: none;
 	display:flex;
 	justify-content: space-between;
-	background: red;
+	background: #E6E6FA;
 }
 .completeBtn{
-
 }
-
 </style>
 <body>
 
-<h1 id ="title">Get It Done List
-</h1>
+<div id="header">
+	<h1 id ="title">Get It Done List
+	</h1>
 
-<input id="itemInput" type="text" placeholder="enter items">
-<button id="addItemBtn">ADD
-  </button>
-
+	<input id="itemInput" type="text" placeholder="enter items">
+	<button id="addItemBtn">ADD</button>
+	<div id="clock">
+	</div>
+</div>
 
 <ul id="list">
 </ul>
 
 <script>
+//function to countdown time to end of day
+function updateClock(){
+let date = new Date();
+let hoursLeft = 23 - date.getHours();
+let minutesLeft = 59 - date.getMinutes();
+let secondsLeft = 60 - date.getSeconds();
+
+return (`${hoursLeft} hours ${minutesLeft} minutes and ${secondsLeft} seconds left till tomorrow`);
+};
+
+function paintClock(){
+let clock = document.getElementById("clock");
+
+clock.innerHTML = updateClock();
+};
+
+//add item to list	
 function addItem(){
+	//if input field is not empty take that value and store as item
 	let input = document.getElementById("itemInput");
 	let item;
 	if(input.value != ""){
 		 item = input.value;
-	}
+//create li and assign class 
 	let LI = document.createElement("LI");
 		LI.className = "listItem";
+//take value from input and append it as text node to li
 	let text = document.createTextNode(item);
 	LI.appendChild(text);
-	
+//create a button with text and append to li
 	let btn =document.createElement("BUTTON");
 		btn.className ="completeBtn";
 	let btnTxt=document.createTextNode("complete");
 		btn.appendChild(btnTxt);
 		LI.appendChild(btn);
+//append li with button to list
 	let list=document.getElementById("list");
 		list.appendChild(LI);
-		
-	
+	}	
+//reset input field to empty string		
 	input.value ="";
 };
 
-
 let addItemBtn = document.getElementById("addItemBtn");
 addItemBtn.addEventListener("click", addItem, false);
+
+setInterval("paintClock", 1000);
 
 </script>
 
