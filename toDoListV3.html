@@ -3,9 +3,20 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-
 </style>
 </head>
+<style>
+
+ .listItem {
+	display:flex;
+	justify-content: space-between;
+	background: red;
+}
+.completeBtn{
+
+}
+
+</style>
 <body>
 
 <h1 id ="title">Get It Done List
@@ -17,17 +28,36 @@
 
 
 <ul id="list">
-  <li class="listItem">eat</li>
-   <li class="listItem">sleep</li>
-    <li class="listItem">pray</li>
-     <li class="listItem">quit job</li>
 </ul>
 
-
 <script>
+function addItem(){
+	let input = document.getElementById("itemInput");
+	let item;
+	if(input.value != ""){
+		 item = input.value;
+	}
+	let LI = document.createElement("LI");
+		LI.className = "listItem";
+	let text = document.createTextNode(item);
+	LI.appendChild(text);
+	
+	let btn =document.createElement("BUTTON");
+		btn.className ="completeBtn";
+	let btnTxt=document.createTextNode("complete");
+		btn.appendChild(btnTxt);
+		LI.appendChild(btn);
+	let list=document.getElementById("list");
+		list.appendChild(LI);
+		
+	
+	input.value ="";
+};
 
 
-  
+let addItemBtn = document.getElementById("addItemBtn");
+addItemBtn.addEventListener("click", addItem, false);
+
 </script>
 
 </body>
