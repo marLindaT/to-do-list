@@ -41,15 +41,15 @@ ul li:nth-child(odd){
 
 	<input id="itemInput" type="text" placeholder="enter items">
 	<button id="addItemBtn">ADD</button>
-	<div id="clock">
-	</div>
+	<div id="clock">Clock goes here</div>
 </div>
 
-<ul id="list">
-</ul>
+
+<ul id="list"></ul>
+
 
 <script>
-//function to countdown time to end of day
+//countdown time to end of day
 function updateClock(){
 let date = new Date();
 let hoursLeft = 23 - date.getHours();
@@ -59,10 +59,11 @@ let secondsLeft = 60 - date.getSeconds();
 return (`${hoursLeft} hours ${minutesLeft} minutes and ${secondsLeft} seconds left till tomorrow`);
 };
 
+//paint clock to DOM
 function paintClock(){
-let clock = document.getElementById("clock");
-
-clock.innerHTML = updateClock();
+	let clock = document.getElementById("clock");
+	let time = updateClock();
+		clock.innerHTML = time;
 };
 
 //add item to list	
@@ -92,10 +93,39 @@ function addItem(){
 	input.value ="";
 };
 
+//function removeItem(){
+	let items = document.getElementsByClassName("completeBtn");
+
+	for(let i = 0; i<items.length; i++){
+		items[i].onclick = function(){
+			let div = this.parentElement;
+			div.style.display = 'none';
+		}
+	}
+
+//};
+/******************************
+
+// Click on a close button to hide the current list item
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+******************************/
+
+//event listener wont work without any instances of the class
+// let items = document.getElementsByClassName("completeBtn");
+// items.addEventListener("click", removeItem, false);
+
 let addItemBtn = document.getElementById("addItemBtn");
 addItemBtn.addEventListener("click", addItem, false);
 
-setInterval("paintClock", 1000);
+setInterval(paintClock, 1000);
 
 </script>
 
