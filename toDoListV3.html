@@ -30,7 +30,15 @@ ul li:nth-child(odd){
 	justify-content: space-between;
 	background: #E6E6FA;
 }
+ul li.done{
+	display:none;
+}
+ul li.strikeout{
+	text-decoration: line-through;
+}
 .completeBtn{
+	background-color: green;
+	color: white;
 }
 </style>
 <body>
@@ -49,6 +57,8 @@ ul li:nth-child(odd){
 
 
 <script>
+
+
 //countdown time to end of day
 function updateClock(){
 let date = new Date();
@@ -93,17 +103,30 @@ function addItem(){
 	input.value ="";
 };
 
-//function removeItem(){
-	let items = document.getElementsByClassName("completeBtn");
-
-	for(let i = 0; i<items.length; i++){
-		items[i].onclick = function(){
-			let div = this.parentElement;
-			div.style.display = 'none';
-		}
+//hide list items that have been completed by clicking on the item
+//consider changing this to remove elements by clicking on complete button
+let ulist = document.getElementById("list");
+ulist.addEventListener("click", function(e){
+	if(e.target.tagName ==="LI"){
+		e.target.classList.toggle("done");
 	}
+})
 
-//};
+//work in progress for strikeout effect on text after clicking complete
+/**************
+
+let ulist = document.getElementById("list");
+ulist.addEventListener("click", function(e){
+	if(e.target.tagName ==="BUTTON"){
+		e.target.classList.toggle("strikeout");
+	}
+})
+
+
+
+**************/
+
+
 /******************************
 
 // Click on a close button to hide the current list item
