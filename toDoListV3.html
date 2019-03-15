@@ -150,6 +150,27 @@ addItemBtn.addEventListener("click", addItem, false);
 
 setInterval(paintClock, 1000);
 
+function testing(){
+
+	let str = "hello_world";
+
+	for(let i=0; i<str.length; i++){
+
+		
+
+		let input = document.getElementById("itemInput");
+
+		input.value = str[i];
+
+		addItem();
+	}
+
+
+
+};
+
+testing();
+
 </script>
 
 </body>
