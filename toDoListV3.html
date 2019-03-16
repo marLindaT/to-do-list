@@ -66,7 +66,7 @@ let hoursLeft = 23 - date.getHours();
 let minutesLeft = 59 - date.getMinutes();
 let secondsLeft = 60 - date.getSeconds();
 
-return (`${hoursLeft} hours ${minutesLeft} minutes and ${secondsLeft} seconds left till tomorrow`);
+return (`${hoursLeft} : ${minutesLeft} : ${secondsLeft} until tomorrow`);
 };
 
 //paint clock to DOM
@@ -106,25 +106,22 @@ function addItem(){
 //hide list items that have been completed by clicking on the item
 //consider changing this to remove elements by clicking on complete button
 let ulist = document.getElementById("list");
+
+
 ulist.addEventListener("click", function(e){
 	if(e.target.tagName ==="LI"){
-		e.target.classList.toggle("done");
-	}
-})
-
-//work in progress for strikeout effect on text after clicking complete
-/**************
-
-let ulist = document.getElementById("list");
-ulist.addEventListener("click", function(e){
-	if(e.target.tagName ==="BUTTON"){
 		e.target.classList.toggle("strikeout");
 	}
+}, false)
+
+//work in progress for strikeout effect on text after clicking complete
+
+ulist.addEventListener("click", function(ev){
+	if(ev.target.tagName ==="BUTTON"){
+		ev.target.parentNode.classList.toggle("done");
+	}
+
 })
-
-
-
-**************/
 
 
 /******************************
@@ -150,26 +147,44 @@ addItemBtn.addEventListener("click", addItem, false);
 
 setInterval(paintClock, 1000);
 
+function settingStorage(){
+
+	let saved = document.getElementsByTagName("LI");
+	let savedList = [...saved];
+	for(let i=0; i<savedList.length; i++){
+	console.log(savedList[i]);
+}
+}
+
+
+/*********************LOCAL STORAGE PROTOCOL
+
+
+localStorage.setItem('myCat', 'Tom');
+
+var cat = localStorage.getItem('myCat');
+
+localStorage.removeItem('myCat');
+
+// Clear all items
+localStorage.clear();
+
+
+********************************/
+
+//below for testing
+
 function testing(){
-
-	let str = "hello_world";
-
+	let input = document.getElementById("itemInput");
+	let str = "Hello_World";
 	for(let i=0; i<str.length; i++){
-
-		
-
-		let input = document.getElementById("itemInput");
-
-		input.value = str[i];
-
+		input.value = str;
 		addItem();
 	}
-
-
-
 };
 
 testing();
+
 
 </script>
 
