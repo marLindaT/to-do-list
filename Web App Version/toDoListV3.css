@@ -1,0 +1,36 @@
+<style>
+html{
+	background: #FAFAD2;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+}
+
+
+ul{
+	margin:0;
+	padding:0;
+}
+li:hover{
+	background:green;
+}
+ul li:nth-child(odd){
+	background: gray;
+}
+ .listItem {
+ 	margin: 1px;
+ 	padding:3px;
+ 	list-style-type: none;
+	display:flex;
+	justify-content: space-between;
+	background: #E6E6FA;
+}
+ul li.done{
+	display:none;
+}
+ul li.strikeout{
+	text-decoration: line-through;
+}
+.completeBtn{
+	background-color: green;
+	color: white;
+}
+</style>
