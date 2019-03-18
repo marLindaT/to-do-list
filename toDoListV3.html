@@ -50,6 +50,8 @@ ul li.strikeout{
 	<input id="itemInput" type="text" placeholder="enter items">
 	<button id="addItemBtn">ADD</button>
 	<div id="clock">Clock goes here</div>
+	<button id="saveBtn">Store List</button>
+	<button id="clearAll">CLEAR</button>
 </div>
 
 
@@ -124,19 +126,6 @@ ulist.addEventListener("click", function(ev){
 })
 
 
-/******************************
-
-// Click on a close button to hide the current list item
-var close = document.getElementsByClassName("close");
-var i;
-for (i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
-    var div = this.parentElement;
-    div.style.display = "none";
-  }
-}
-
-******************************/
 
 //event listener wont work without any instances of the class
 // let items = document.getElementsByClassName("completeBtn");
@@ -156,6 +145,25 @@ function settingStorage(){
 }
 }
 
+//use #saveBtn to store all list items in localStorage
+// do not store items with .done
+
+let saveBtn = document.getElementById("saveBtn");
+
+saveBtn.addEventListener("click", function(){
+	let counter = 0;
+	let item = document.getElementsByClassName("listItem");
+	let items = [...item];
+	//each list item
+	for(let i=0;i< items.length;i++){
+		//each item without .done
+		if(!items[i].classList.contains("done")){
+			counter+=1;
+			localStorage.setItem(`item${counter}`,items[i].value );
+		}
+	}
+}, false);
+
 
 /*********************LOCAL STORAGE PROTOCOL
 
@@ -171,20 +179,41 @@ localStorage.clear();
 
 
 ********************************/
-
+//                     /*
 //below for testing
 
+
+let clearBtn = document.getElementById("clearAll");
+clearBtn.addEventListener("click", function(){
+	localStorage.clear();
+});
+
 function testing(){
-	let input = document.getElementById("itemInput");
+
+let input = document.getElementById("itemInput");
+
+
+	for(let h =0; h<99; h++){
+		if(localStorage.getItem(`item${h}`)){
+			let current = localStorage.getItem(`item${h}`);
+			input.value = current;
+			addItem();
+			
+		}
+	}
+
 	let str = "Hello_World";
-	for(let i=0; i<str.length; i++){
+	for(let i=0; i<5; i++){
 		input.value = str;
 		addItem();
 	}
 };
 
-testing();
+let body = document.getElementsByTagName("BODY")[0];
 
+body.onload = testing();
+
+//               */
 
 </script>
 
