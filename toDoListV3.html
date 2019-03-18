@@ -159,7 +159,7 @@ saveBtn.addEventListener("click", function(){
 		//each item without .done
 		if(!items[i].classList.contains("done")){
 			counter+=1;
-			localStorage.setItem(`item${counter}`,items[i].value );
+			localStorage.setItem(`item${counter}`,items[i].childNodes[0].nodeValue );
 		}
 	}
 }, false);
@@ -188,30 +188,32 @@ clearBtn.addEventListener("click", function(){
 	localStorage.clear();
 });
 
-function testing(){
+function populateList(){
 
 let input = document.getElementById("itemInput");
 
+let needAutoValues = false;
 
 	for(let h =0; h<99; h++){
 		if(localStorage.getItem(`item${h}`)){
 			let current = localStorage.getItem(`item${h}`);
 			input.value = current;
 			addItem();
-			
+			needAutoValues = true;
 		}
 	}
-
+if(needAutoValues){
 	let str = "Hello_World";
 	for(let i=0; i<5; i++){
 		input.value = str;
 		addItem();
 	}
+}	
 };
 
 let body = document.getElementsByTagName("BODY")[0];
 
-body.onload = testing();
+body.onload = populateList();
 
 //               */
 
