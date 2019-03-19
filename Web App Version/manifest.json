@@ -1,0 +1,13 @@
+{
+  "name": "Get Sum To Do List",
+  "short_name": "To Do List",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#fff",
+  "description": "Organize your life with this intuitive app",
+  "icons": [{
+    "src": "images/touch/homescreen48.png",
+    "sizes": "48x48",
+    "type": "image/png"
+  }]
+}
